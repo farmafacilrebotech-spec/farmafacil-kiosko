@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
+import FooterButtons from "@/app/farmacia/components/FooterButtons";
+import AssistantButton from "@/app/farmacia/components/AssistantButton";
 
 // Tipos
 interface Producto {
@@ -65,7 +67,19 @@ export default function KioskoClient({
     }, 2000);
   };
 
-  return (
+  const handleImprimirTicket = () => {
+    console.log("Imprimir ticket");
+  };
+
+  const handlePagarEImprimir = () => {
+    console.log("Pagar e imprimir");
+  };
+
+  const handleAsistente = () => {
+    console.log("Asistente");
+  };
+
+   return (
     <div className="p-4 max-w-4xl mx-auto pb-32">
 
       {/* HEADER KIOSKO */}
@@ -134,33 +148,43 @@ export default function KioskoClient({
       </div>
 
       {/* BOTONERA KIOSKO */}
-      {carrito.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] flex gap-2 justify-center">
+      {/* BARRA INFERIOR KIOSKO — MISMO ESTILO QUE EL HEADER */}
+      <div
+        className="fixed bottom-0 left-0 w-full z-50"
+        style={{
+            background: "linear-gradient(135deg, #2CD4C2, #1FB4A6)",
+        }}
+      >
+      <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-around text-white">
 
-          <button
-            className="flex-1 py-3 rounded-lg text-white font-bold"
-            style={{ background: "#1E7F76" }}
-            onClick={finalizarPedido}
-          >
-            Imprimir ticket
-          </button>
+      <button
+         className="bg-white text-[#1FB4A6] font-semibold px-4 py-2 rounded-lg shadow-md text-sm hover:bg-slate-100 transition"
+         onClick={handleImprimirTicket}
+      >
+         Imprimir ticket
+      </button>
 
-          <button
-            className="flex-1 py-3 rounded-lg text-white font-bold"
-            style={{ background: "#16695E" }}
-            onClick={finalizarPedido}
-          >
-            Pagar e imprimir
-          </button>
+      <button
+         className="bg-[#ffffff] text-[#1FB4A6] font-semibold px-4 py-2 rounded-lg shadow-md text-sm hover:bg-slate-100 transition"
+      onClick={handlePagarEImprimir}
+      >
+         Pagar e imprimir
+      </button>
 
+      <button
+        className="bg-white text-[#1FB4A6] font-semibold px-4 py-2 rounded-lg shadow-md text-sm hover:bg-slate-100 transition"
+        onClick={handleAsistente}
+      >
+        Asistente
+      </button>
         </div>
-      )}
+      </div>
 
       {/* MENSAJE DE ÉXITO */}
       {pedidoFinalizado && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-            <h2 className="text-xl font-bold text-green-600">¡Pedido enviado!</h2>
+            <h2 className="text-xl font-bold text-green-600">¡Pedido finalizado!</h2>
             <p className="mt-2">Acércate al mostrador para recoger tu compra.</p>
           </div>
         </div>
